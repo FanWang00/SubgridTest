@@ -3,6 +3,9 @@ import StatsBase: Histogram
 import HypothesisTests
 import Polynomials
 
+"""
+Kolmogorov–Smirnov test for similarity of 2 empirical distributions 
+"""
 ## KS test of 2 distributions
 function KS_test(Xdata, Tdata, bins)
     densX = DiscreteDensity(Xdata,bins)
@@ -11,6 +14,9 @@ function KS_test(Xdata, Tdata, bins)
     return p_value
 end
 
+"""
+Empirical distributions  
+"""
 ## discrete pdf
 function DiscreteDensity(data, bins)
     N = length(data)
@@ -19,6 +25,9 @@ function DiscreteDensity(data, bins)
     return density;
 end
 
+"""
+polynomial fit with X, y and regression order 
+"""
 ## poly fit 
 function poly_fit(X, y, reg_order=2, round_digits=4)
     fitted = Polynomials.fit(X, y, reg_order) |> p -> round.(Polynomials.coeffs(p), digits=4) |> Polynomials.Polynomial

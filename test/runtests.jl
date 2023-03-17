@@ -6,4 +6,3 @@ using Test
     include("func.jl")
     include("func_LR.jl")
 end
-using Test

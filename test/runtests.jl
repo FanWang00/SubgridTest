@@ -1,6 +1,6 @@
-using SubgridTest
+using SubgridTest00
 using Test
 
-@testset "SubgridTest.jl" begin
+@testset "SubgridTest00.jl" begin
     # Write your tests here.
 end

@@ -1,0 +1,17 @@
+name = "MyTestTwo"
+uuid = "1ae4e9f7-0bf7-4810-9c64-32643ef8d55c"
+authors = ["My Name <mail@adress.com>"]
+version = "1.0.0-DEV"
+
+[deps]
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+julia = "1.6"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

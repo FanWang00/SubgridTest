@@ -1,14 +1,14 @@
 ```@meta
-CurrentModule = SubgridTest00
+CurrentModule = SubgridTest
 ```
 
-# SubgridTest00
+# SubgridTest
 
-Documentation for [SubgridTest00](https://github.com/FanWang0000/SubgridTest00.jl).
+Documentation for [SubgridTest](https://github.com/FanWang0000/SubgridTest.jl).
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [SubgridTest00]
+Modules = [SubgridTest]
 ```

@@ -1,5 +1,7 @@
 module SubgridTest
 
+# Write your package code here.
+module SubgridTest
     # using DifferentialEquations
     include("L96func.jl") 
     include("tools.jl") 

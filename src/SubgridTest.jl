@@ -1,4 +1,4 @@
-module SubgridTest00
+module SubgridTest
 
     # using DifferentialEquations
     include("L96func.jl") 

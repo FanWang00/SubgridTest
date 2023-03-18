@@ -9,7 +9,8 @@ module SubgridTest
     export KS_test,
            DiscreteDensity, 
            poly_fit,
-
+           
+           circshift_left
            Lorenz96One_shift!, 
            Lorenz96Two_shift_LR!, 
            Lorenz96Two_shift!, 

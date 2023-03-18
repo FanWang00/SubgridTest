@@ -11,25 +11,28 @@ function lorenz96!(dy,y,p,t)
     end
 end
 
-"""
- array index shift, reverse diection of in-built circshift function to make sign of index same as in formula.   
-"""
+
 function circshift_left(a, shifts)
+        """
+        array index shift, reverse diection of in-built circshift function to make sign of index same as in formula.   
+        """
     return circshift(a, -shifts)
 end
 
-"""
-One-layer Lorenz 96 equation 
-"""
+
 function Lorenz96One_shift!(dy,y,p,t) 
+        """
+        One-layer Lorenz 96 equation 
+        """
     F, K = p;
     dy[:] = circshift(y,-1).*(circshift(y, 1)-circshift(y,-2)) - y .+ F;
 end
 
-"""
-specific formualtion of One-layer Lorenz 96 for lienar regression.
-"""
+
 function Lorenz96Two_shift_LR!(dy,y,p,t) 
+        """
+        specific formualtion of One-layer Lorenz 96 for lienar regression.
+        """
     # dy_new = zero(y)
     K, F, J, b, p_subgrid = p
     # println(p_subgrid)
@@ -46,10 +49,12 @@ function Lorenz96Two_shift_LR!(dy,y,p,t)
     # return dy_new
 end
 
-"""
-Two-layer Lorenz 96
-"""
+
 function Lorenz96Two_shift!(dy,y,p,t) 
+        """
+        Two-layer Lorenz 96
+        """
+
     F, K, J, h, b, c = p
     # println(p_subgrid)
     dimX = K
@@ -69,10 +74,11 @@ function Lorenz96Two_shift!(dy,y,p,t)
     # return dy_new
 end
 
-"""
-Three-layer Lorenz 96
-"""
+
 function Lorenz96Three_shift!(dy,y,p,t) 
+        """
+        Three-layer Lorenz 96
+        """
     F, K, J, I, h, b, c, e, d, g = p
     # println(p_subgrid)
     # c = p_subgrid.c
@@ -98,10 +104,11 @@ function Lorenz96Three_shift!(dy,y,p,t)
     # return dy_new
 end
 
-"""
-Subgrid estimation of Two-layer Lorenz 96 by one parameter for all dimension
-"""
+
 function Lorenz96Two_polyB!(dy,y,p,t) 
+        """
+        Subgrid estimation of Two-layer Lorenz 96 by one parameter for all dimension
+        """
     # dy_new = zero(y)
     K, F, J, b, p_subgrid, B_poly = p
     # println(p_subgrid)
@@ -119,10 +126,11 @@ function Lorenz96Two_polyB!(dy,y,p,t)
     # return dy_new
 end
 
-"""
-Subgrid estimation of Two-layer Lorenz 96 by k parameters for k dimension
-"""
 function Lorenz96Two_polyBk!(dy,y,p,t) 
+    
+        """
+        Subgrid estimation of Two-layer Lorenz 96 by k parameters for k dimension
+        """
     # dy_new = zero(y)
     K, F, J, b, p_subgrid, B_poly = p
     # println(p_subgrid)

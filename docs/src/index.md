@@ -13,8 +13,5 @@ Documentation for [SubgridTest](https://github.com/FanWang0000/SubgridTest.jl).
 Modules = [SubgridTest]
 
 ```@docs
-circshift_left
-"""
-test 02
-"""
+SubgridTest.circshift_left
 ```

@@ -20,3 +20,7 @@ makedocs(;
         "Home" => "index.md"
     ],
 )
+
+deploydocs(
+    repo = "github.com/white-alistair/Exercise7.jl.git",
+)

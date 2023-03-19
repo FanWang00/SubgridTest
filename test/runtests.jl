@@ -1,5 +1,7 @@
 using Pkg
+# Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
 Pkg.activate("..")
+
 using SubgridTest
 using Test
 

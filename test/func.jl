@@ -63,8 +63,8 @@ solTwo = solve(probTwo, dt=dt, saveat=dt);
 solTwo_t = solTwo.t
 solTwoX = solTwo[1:K,:]
 solTwoY = solTwo[K+1:end,:]
-println(size(solOne))
-println(size(exact_solOneX))
+# println(size(solOne))
+# println(size(exact_solOneX))
 @test solOneX ≈ exact_solOneX
 @test solTwoX≈exact_solTwoX_LR
 @test solTwoY≈exact_solTwoY_LR

@@ -2,6 +2,8 @@
 # using DifferentialEquations
 # using Random, Distributions
 using StatsBase, Statistics
+
+
 function lorenz96!(dy,y,p,t) 
     F, K = p
     
@@ -13,18 +15,22 @@ function lorenz96!(dy,y,p,t)
     end
 end
 
-"""
+@doc raw"""
 circshift_left(a, shifts)
-test
+
+
+array index shift, reverse diection of in-built circshift function to make sign of index same as in formula.  
 """
 function circshift_left(a, shifts)
 
     return circshift(a, -shifts)
 end
 
-"""
+@doc raw"""
 Lorenz96One_shift!(dy,y,p,t)
-test
+
+
+One-layer Lorenz 96 equation 
 """
 function Lorenz96One_shift!(dy,y,p,t)
 
@@ -32,14 +38,12 @@ function Lorenz96One_shift!(dy,y,p,t)
     dy[:] = circshift(y,-1).*(circshift(y, 1)-circshift(y,-2)) - y .+ F;
 end
 
-"""
+@doc raw"""
 Lorenz96Two_shift_LR!(dy,y,p,t) 
-test
+specific formualtion of One-layer Lorenz 96 for lienar regression.
 """
 function Lorenz96Two_shift_LR!(dy,y,p,t) 
-        """
-        specific formualtion of One-layer Lorenz 96 for lienar regression.
-        """
+
     # dy_new = zero(y)
     K, F, J, b, p_subgrid = p
     # println(p_subgrid)
@@ -56,9 +60,9 @@ function Lorenz96Two_shift_LR!(dy,y,p,t)
     # return dy_new
 end
 
-"""
+@doc raw"""
 Lorenz96Two_shift!(dy,y,p,t) 
-test
+Two-layer Lorenz 96
 """
 function Lorenz96Two_shift!(dy,y,p,t) 
         """
@@ -84,9 +88,9 @@ function Lorenz96Two_shift!(dy,y,p,t)
     # return dy_new
 end
 
-"""
+@doc raw"""
 Lorenz96Three_shift!(dy,y,p,t) 
-test
+Three-layer Lorenz 96
 """
 function Lorenz96Three_shift!(dy,y,p,t) 
         """
@@ -117,9 +121,9 @@ function Lorenz96Three_shift!(dy,y,p,t)
     # return dy_new
 end
 
-"""
+@doc raw"""
 Lorenz96Two_polyB!(dy,y,p,t)
-test
+Subgrid estimation of Two-layer Lorenz 96 by one parameter for all dimension
 """
 function Lorenz96Two_polyB!(dy,y,p,t) 
         """
@@ -143,30 +147,21 @@ function Lorenz96Two_polyB!(dy,y,p,t)
 end
 
 
-"""
+@doc raw"""
 Lorenz96Two_polyBk!(dy,y,p,t)
+
 Subgrid estimation of Two-layer Lorenz 96 by k parameters for k dimension
 """
 function Lorenz96Two_polyBk!(dy,y,p,t) 
     
-
-    # dy_new = zero(y)
     K, F, J, b, p_subgrid, B_poly = p
-    # println(p_subgrid)
-    # c = p_subgrid.c
-    # h = p_subgrid.h
-    # X = y[1:K]
-    # Y = y[K+1:end]
-    # Y_mean = dropdims(mean(reshape(Y, K, J), dims=2), dims=2)
+
     Bk = zeros(K)
     for i = 1:K
         Bk[i] = B_poly[i](y[i])
     end
 
     dX = circshift_left(y,-1).*(circshift_left(y, 1)-circshift_left(y,-2)) - y .+ F .+ Bk
-    # println(size(Y_mean))
-    # dY = (circshift_left(Y,1).*(circshift_left(Y, -1)-circshift_left(Y,2)).*b - Y .+ h/J .* repeat(X, J)) .* c
     dy[:] = dX
-    # dy[K+1:end] = dY
-    # return dy_new
+
 end

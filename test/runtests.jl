@@ -1,8 +1,8 @@
 using Pkg
 # Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
-Pkg.activate("..")
+# Pkg.activate("..")
 
-using SubgridTest
+# using SubgridTest
 using Test
 
 @testset "SubgridTest.jl" begin

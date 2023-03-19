@@ -1,5 +1,5 @@
-# cd(@__DIR__)
-using SubgridTest
+cd(@__DIR__)
+# using SubgridTest
 using DifferentialEquations, JLD2, Test
 
 # jldsave("unittest_data_LR.jld2"; BoneX=BoneX, BkX=BkX, u0_BLR=u0, density_BkX=density_BkX, density_BoneX)
@@ -73,7 +73,8 @@ solTwoBk = solve(probTwoBk, dt=dt, saveat=dt);
 BoneX = solTwoBone[:, :]
 BkX = solTwoBk[:,:]
 # TwoB_estX = solTwoB_est[1:K,:];
-
+println(exact_BoneX[end,end])
+println(BoneX[end,end])
 @test BoneX ≈ exact_BoneX
 @test BkX≈exact_BkX
 # @test solTwoY≈exact_solTwoY_LR

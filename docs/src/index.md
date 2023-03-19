@@ -20,5 +20,4 @@ Lorenz96Two_shift_LR!
 Lorenz96Two_shift!
 Lorenz96Two_polyB!
 Lorenz96Two_polyBk!
-
 ```

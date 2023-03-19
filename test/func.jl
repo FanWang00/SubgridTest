@@ -1,5 +1,5 @@
 cd(@__DIR__)
-using SubgridTest
+# using SubgridTest
 using DifferentialEquations, JLD2, Test
 
 u0Two_LR = jldopen("./unittest_data.jld2", "r") do file
@@ -32,29 +32,6 @@ end
 
 # include("./tools.jl")
 
-
-# starting time 
-# T0 = 0 
-# # end time
-# Tmax = 10
-
-# K = 10 # so 10 degrees of longtitude per node
-# J = 36
-# F = 10
-
-# # ux0 = rand(K)
-# dt = 0.05
-
-# # uy0 = rand(K*J)
-# h = 1
-# c = 10
-# b = 10
-
-# args = (F, K, J, h, b, c)
-# # u0 = [ux0; uy0]
-# println(size(u0Two))
-# probTwo = ODEProblem(Lorenz96Two_shift!, u0Two, (T0,Tmax), args);
-# solTwo = solve(probTwo, dt=dt, saveat=dt);
 T0 = 0
 Tmax = 10
 K = 36 # so 10 degrees of longtitude per node

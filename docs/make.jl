@@ -1,5 +1,6 @@
 using Pkg
 Pkg.add("Documenter")
+Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
 using SubgridTest
 using Documenter
 
@@ -16,6 +17,6 @@ makedocs(;
         assets=String[],
     ),
     pages=[
-        "Home" => "index.md",
+        "Home" => "index.md"
     ],
 )

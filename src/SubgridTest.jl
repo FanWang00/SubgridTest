@@ -10,6 +10,10 @@ module SubgridTest
            DiscreteDensity, 
            poly_fit,
 
+           ```@docs
+           circshift_left
+           ```
+
            circshift_left,
            Lorenz96One_shift!, 
            Lorenz96Two_shift_LR!, 

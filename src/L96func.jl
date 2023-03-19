@@ -11,7 +11,10 @@ function lorenz96!(dy,y,p,t)
     end
 end
 
-
+```@docs
+circshift_left
+array index shift, reverse diection of in-built circshift function to make sign of index same as in formula.   
+```
 function circshift_left(a, shifts)
         """
         array index shift, reverse diection of in-built circshift function to make sign of index same as in formula.   

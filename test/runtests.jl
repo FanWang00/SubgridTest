@@ -1,3 +1,5 @@
+using Pkg
+Pkg.activate("..")
 using SubgridTest
 using Test
 

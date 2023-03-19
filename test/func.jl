@@ -55,7 +55,8 @@ end
 # println(size(u0Two))
 # probTwo = ODEProblem(Lorenz96Two_shift!, u0Two, (T0,Tmax), args);
 # solTwo = solve(probTwo, dt=dt, saveat=dt);
-
+T0 = 0
+Tmax = 10
 K = 36 # so 10 degrees of longtitude per node
 F = 10
 J = 10

@@ -1,6 +1,6 @@
 using Pkg
 Pkg.add("Documenter")
-Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
+# Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
 using SubgridTest
 using Documenter
 

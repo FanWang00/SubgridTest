@@ -13,25 +13,29 @@ function lorenz96!(dy,y,p,t)
 end
 
 """
-circshift_left
+circshift_left(a::Array, shifts::Integer)
+test
 """
-
-function circshift_left(a, shifts)
+function circshift_left(a::Array, shifts::Integer)
 
     return circshift(a, -shifts)
 end
 
+"""
+Lorenz96One_shift!(dy::Array,y::Array,p::T,t::T)
+test
+"""
+function Lorenz96One_shift!(dy::Array,y::Array,p::T,t::T)
 
-function Lorenz96One_shift!(dy,y,p,t) 
-        """
-        One-layer Lorenz 96 equation 
-        """
     F, K = p;
     dy[:] = circshift(y,-1).*(circshift(y, 1)-circshift(y,-2)) - y .+ F;
 end
 
-
-function Lorenz96Two_shift_LR!(dy,y,p,t) 
+"""
+Lorenz96Two_shift_LR!(dy::Array,y::Array,p::T,t::T) 
+test
+"""
+function Lorenz96Two_shift_LR!(dy::Array,y::Array,p::T,t::T) 
         """
         specific formualtion of One-layer Lorenz 96 for lienar regression.
         """
@@ -51,8 +55,11 @@ function Lorenz96Two_shift_LR!(dy,y,p,t)
     # return dy_new
 end
 
-
-function Lorenz96Two_shift!(dy,y,p,t) 
+"""
+Lorenz96Two_shift!(dy::Array,y::Array,p::T,t::T) 
+test
+"""
+function Lorenz96Two_shift!(dy::Array,y::Array,p::T,t::T) 
         """
         Two-layer Lorenz 96
         """
@@ -76,8 +83,11 @@ function Lorenz96Two_shift!(dy,y,p,t)
     # return dy_new
 end
 
-
-function Lorenz96Three_shift!(dy,y,p,t) 
+"""
+Lorenz96Three_shift!(dy::Array,y::Array,p::T,t::T) 
+test
+"""
+function Lorenz96Three_shift!(dy::Array,y::Array,p::T,t::T) 
         """
         Three-layer Lorenz 96
         """
@@ -106,8 +116,11 @@ function Lorenz96Three_shift!(dy,y,p,t)
     # return dy_new
 end
 
-
-function Lorenz96Two_polyB!(dy,y,p,t) 
+"""
+Lorenz96Two_polyB!(dy::Array,y::Array,p::T,t::T)
+test
+"""
+function Lorenz96Two_polyB!(dy::Array,y::Array,p::T,t::T) 
         """
         Subgrid estimation of Two-layer Lorenz 96 by one parameter for all dimension
         """
@@ -128,11 +141,14 @@ function Lorenz96Two_polyB!(dy,y,p,t)
     # return dy_new
 end
 
-function Lorenz96Two_polyBk!(dy,y,p,t) 
+
+"""
+Lorenz96Two_polyBk!(dy::Array,y::Array,p::T,t::T)
+Subgrid estimation of Two-layer Lorenz 96 by k parameters for k dimension
+"""
+function Lorenz96Two_polyBk!(dy::Array,y::Array,p::T,t::T) 
     
-        """
-        Subgrid estimation of Two-layer Lorenz 96 by k parameters for k dimension
-        """
+
     # dy_new = zero(y)
     K, F, J, b, p_subgrid, B_poly = p
     # println(p_subgrid)

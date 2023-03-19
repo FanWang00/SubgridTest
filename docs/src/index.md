@@ -11,6 +11,7 @@ Documentation for [SubgridTest](https://github.com/FanWang0000/SubgridTest.jl).
 
 ```@autodocs
 Modules = [SubgridTest]
+```
 
 ```@docs
 SubgridTest.circshift_left

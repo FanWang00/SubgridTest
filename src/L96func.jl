@@ -1,3 +1,4 @@
+module L96func
 # using DifferentialEquations
 using Random, Distributions
 function lorenz96!(dy,y,p,t) 
@@ -11,9 +12,10 @@ function lorenz96!(dy,y,p,t)
     end
 end
 
-```@docs
+"""
 circshift_left
-```
+"""
+
 function circshift_left(a, shifts)
 
     return circshift(a, -shifts)
@@ -151,4 +153,4 @@ function Lorenz96Two_polyBk!(dy,y,p,t)
     # dy[K+1:end] = dY
     # return dy_new
 end
-
+end

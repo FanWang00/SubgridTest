@@ -4,11 +4,11 @@ import HypothesisTests
 import Polynomials
 
 
-## KS test of 2 distributions
+@doc raw"""  KS_test(Xdata, Tdata, bins)
+
+Kolmogorov – Smirnov test for similarity of 2 empirical distributions 
+"""
 function KS_test(Xdata, Tdata, bins)
-        """
-        Kolmogorov–Smirnov test for similarity of 2 empirical distributions 
-        """
 
     densX = DiscreteDensity(Xdata,bins)
     densT = DiscreteDensity(Tdata,bins)
@@ -17,8 +17,11 @@ function KS_test(Xdata, Tdata, bins)
 end
 
 
-## discrete pdf
-    function DiscreteDensity(data, bins)
+@doc raw""" DiscreteDensity(data, bins)
+
+Probability density estimation from data
+"""
+function DiscreteDensity(data, bins)
         """
         Empirical distributions  
         """
@@ -28,7 +31,10 @@ end
     return density;
 end
 
-## poly fit 
+@doc raw""" poly_fit(X, y, reg_order=2, round_digits=4)
+
+Polynomial fit with X, y and regression order 
+"""
 function poly_fit(X, y, reg_order=2, round_digits=4)
 
     """

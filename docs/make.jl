@@ -1,5 +1,5 @@
 using Pkg
-Pkg.add("Documenter")
+# Pkg.add("Documenter")
 # Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
 using SubgridTest
 using Documenter
@@ -19,8 +19,4 @@ makedocs(;
     pages=[
         "Home" => "index.md"
     ],
-)
-
-deploydocs(
-    repo = "github.com/white-alistair/Exercise7.jl.git",
 )

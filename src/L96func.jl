@@ -31,6 +31,18 @@ Lorenz96One_shift!(dy,y,p,t)
 
 
 One-layer Lorenz 96 equation 
+
+```math
+
+\begin{aligned}
+\frac{d x_i}{d t}= & x_{i-1}\left(x_{i+1}-x_{i-2}\right) x_i+F-\frac{h c}{b} \sum_{j=1}^J y_{(j, i)}, \\
+\frac{d y_{(j, i)}}{d t}= & c b y_{(j+1, i)}\left(y_{(j-1, i)}-y_{(j+2, i)}\right)  -c y_{(j, i)}+\frac{h c}{b} x_i
+\end{aligned}
+```
+
+
+Objects of this type are callable with the signature `(du, u, p, t)` which
+performs an in-place update of the derivatives `du` of the system.
 """
 function Lorenz96One_shift!(dy,y,p,t)
 
@@ -40,7 +52,18 @@ end
 
 @doc raw"""
 Lorenz96Two_shift_LR!(dy,y,p,t) 
+
+
 specific formualtion of One-layer Lorenz 96 for lienar regression.
+```math 
+\begin{aligned}
+ \frac{d X_k}{d t}&={-X_{k-1}\left(X_{k-2}-X_{k+1}\right)} {-X_k} {+F} {-h c \bar{Y}_k} \\
+ \frac{1}{c} \frac{d Y_{j, k}}{d t}&={-b Y_{j+1, k}\left(Y_{j+2, k}-Y_{j-1, k}\right)}_{-Y_{j, k}}+\frac{h}{J} X_k\\ 
+\bar{Y}_k &= \frac{1}{J}\sum^{J}_{j=1}{Y_{k,j}}
+\end{aligned}
+```
+Objects of this type are callable with the signature `(du, u, p, t)` which
+performs an in-place update of the derivatives `du` of the system.
 """
 function Lorenz96Two_shift_LR!(dy,y,p,t) 
 
@@ -62,12 +85,21 @@ end
 
 @doc raw"""
 Lorenz96Two_shift!(dy,y,p,t) 
+
+
 Two-layer Lorenz 96
+
+```math
+
+\begin{aligned}
+\frac{d x_i}{d t}= & x_{i-1}\left(x_{i+1}-x_{i-2}\right) x_i+F-\frac{h c}{b} \sum_{j=1}^J y_{(j, i)}, \\
+\frac{d y_{(j, i)}}{d t}= & c b y_{(j+1, i)}\left(y_{(j-1, i)}-y_{(j+2, i)}\right)  -c y_{(j, i)}+\frac{h c}{b} x_i
+\end{aligned}
+```
+Objects of this type are callable with the signature `(du, u, p, t)` which
+performs an in-place update of the derivatives `du` of the system.
 """
 function Lorenz96Two_shift!(dy,y,p,t) 
-        """
-        Two-layer Lorenz 96
-        """
 
     F, K, J, h, b, c = p
     # println(p_subgrid)
@@ -90,12 +122,12 @@ end
 
 @doc raw"""
 Lorenz96Three_shift!(dy,y,p,t) 
+
+
 Three-layer Lorenz 96
 """
 function Lorenz96Three_shift!(dy,y,p,t) 
-        """
-        Three-layer Lorenz 96
-        """
+
     F, K, J, I, h, b, c, e, d, g = p
     # println(p_subgrid)
     # c = p_subgrid.c
@@ -123,34 +155,43 @@ end
 
 @doc raw"""
 Lorenz96Two_polyB!(dy,y,p,t)
+
 Subgrid estimation of Two-layer Lorenz 96 by one parameter for all dimension
+```math
+\begin{aligned}
+ \frac{d X_k}{d t}&={-X_{k-1}\left(X_{k-2}-X_{k+1}\right)} {-X_k} {+F} + Poly(X_k) \\
+ \frac{1}{c} \frac{d Y_{j, k}}{d t}&={-b Y_{j+1, k}\left(Y_{j+2, k}-Y_{j-1, k}\right)}_{-Y_{j, k}}+\frac{h}{J} X_k
+\end{aligned} 
+```
+
+Objects of this type are callable with the signature `(du, u, p, t)` which
+performs an in-place update of the derivatives `du` of the system.
 """
 function Lorenz96Two_polyB!(dy,y,p,t) 
-        """
-        Subgrid estimation of Two-layer Lorenz 96 by one parameter for all dimension
-        """
-    # dy_new = zero(y)
+
     K, F, J, b, p_subgrid, B_poly = p
-    # println(p_subgrid)
-    # c = p_subgrid.c
-    # h = p_subgrid.h
-    # X = y[1:K]
-    # Y = y[K+1:end]
-    # Y_mean = dropdims(mean(reshape(Y, K, J), dims=2), dims=2)
+
     Bk = B_poly.(y)
     dX = circshift_left(y,-1).*(circshift_left(y, 1)-circshift_left(y,-2)) - y .+ F .+ Bk
-    # println(size(Y_mean))
-    # dY = (circshift_left(Y,1).*(circshift_left(Y, -1)-circshift_left(Y,2)).*b - Y .+ h/J .* repeat(X, J)) .* c
+ 
     dy[:] = dX
-    # dy[K+1:end] = dY
-    # return dy_new
 end
 
 
 @doc raw"""
 Lorenz96Two_polyBk!(dy,y,p,t)
 
+
 Subgrid estimation of Two-layer Lorenz 96 by k parameters for k dimension
+```math
+\begin{aligned}
+ \frac{d X_k}{d t}&={-X_{k-1}\left(X_{k-2}-X_{k+1}\right)} {-X_k} {+F} + Poly(X) \\
+ \frac{1}{c} \frac{d Y_{j, k}}{d t}&={-b Y_{j+1, k}\left(Y_{j+2, k}-Y_{j-1, k}\right)}_{-Y_{j, k}}+\frac{h}{J} X_k
+\end{aligned} 
+```
+
+Objects of this type are callable with the signature `(du, u, p, t)` which
+performs an in-place update of the derivatives `du` of the system.
 """
 function Lorenz96Two_polyBk!(dy,y,p,t) 
     

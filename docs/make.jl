@@ -1,3 +1,5 @@
+using Pkg
+Pkg.add("Documenter")
 using SubgridTest
 using Documenter
 

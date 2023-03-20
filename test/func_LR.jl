@@ -75,9 +75,14 @@ BkX = solTwoBk[:,:]
 # TwoB_estX = solTwoB_est[1:K,:];
 println(exact_BoneX[end,end])
 println(BoneX[end,end])
+@testset "solution of Bx" begin
 @test BoneX ≈ exact_BoneX
+end 
+
+@testset "solution of BOne" begin
 @test BkX≈exact_BkX
-# @test solTwoY≈exact_solTwoY_LR
+end
+
 
 bmax = maximum([BoneX[:]; BkX[:]])
 bmin = minimum([BoneX[:]; BkX[:]])
@@ -85,5 +90,11 @@ bins = LinRange(bmin, bmax, 100);
 # density_TwoB_estX = DiscreteDensity(TwoB_estX[:], bins);
 density_BoneX = DiscreteDensity(BoneX[:], bins);
 density_BkX = DiscreteDensity( BkX[:], bins);
-@test density_BoneX ≈ exact_density_BoneX
+
+@testset "empirical density estimation of BOne" begin
+    @test density_BoneX ≈ exact_density_BoneX
+    end
+
+@testset "empirical density estimation of Bk" begin
 @test density_BkX ≈ exact_density_BkX
+end

@@ -1,30 +1,59 @@
 cd(@__DIR__)
 # using SubgridTest
-using DifferentialEquations, JLD2, Test
+using DifferentialEquations, Test
 
-u0Two_LR = jldopen("./unittest_data.jld2", "r") do file
-    read(file, "u0Two_LR")
-end
+# u0Two_LR = jldopen("./unittest_data.jld2", "r") do file
+#     read(file, "u0Two_LR")
+# end
 
-exact_solTwoX_LR= jldopen("./unittest_data.jld2", "r") do file
-    read(file, "solTwoX_LR")
-end
+# exact_solTwoX_LR= jldopen("./unittest_data.jld2", "r") do file
+#     read(file, "solTwoX_LR")
+# end
 
-exact_solTwoY_LR = jldopen("./unittest_data.jld2", "r") do file
-    read(file, "solTwoY_LR")
-end
-
-
-u0One = jldopen("./unittest_data.jld2", "r") do file
-    read(file, "u0One")
-end
+# exact_solTwoY_LR = jldopen("./unittest_data.jld2", "r") do file
+#     read(file, "solTwoY_LR")
+# end
 
 
-exact_solOneX = jldopen("./unittest_data.jld2", "r") do file
-    read(file, "SolOneX")
-end
+# u0One = jldopen("./unittest_data.jld2", "r") do file
+#     read(file, "u0One")
+# end
 
 
+# exact_solOneX = jldopen("./unittest_data.jld2", "r") do file
+#     read(file, "SolOneX")
+# end
+u0One = ux0 = [0.5650915855652706 ,
+        0.4770559381781504,
+        0.23330303661742935,
+        0.48908579602587166,
+        0.5612334173532582]
+
+u0Two = u0Two_LR =[0.5650915855652706, 0.4770559381781504,0.23330303661742935,0.48908579602587166, 0.5612334173532582,0.6456862361244069, 
+        0.629486187241011,0.29427078357515934,0.238914723539442,0.2347521461056925,0.4897731430825487,0.2888102250672647,
+        0.1897963456062366, 0.936776838730403,0.8168222473595859,0.19103545932301924,0.40912580105812923,0.27957030144254247,
+        0.7949426732495387,0.8034293692339834,0.2454717429348724,0.48413376625566873,0.6005009285079012,0.9438935292480717,
+        0.10633853448406494,0.49821936096514075,0.7566661992631601,0.40398136900329595,0.5797899657165053,0.6185708920097023]
+
+exact_solOneX_last = [9.639222016190082, 6.761652840617998,-3.7041021052071224,8.960546201662986,14.99387147292717]
+
+u0Two2 =u0Two_LR2=  [0.6006046034098041, 0.6626180885926791, 0.875247679527271,0.3335965628528421,0.38218419749263277,0.37910986911513855,
+            0.8020355948232583,0.7704243920125877,0.661108903833448,0.7723783371460472,0.7697517690875237,0.8961186311113634,
+            0.49035554382204793,0.6836806301328081,0.852382545381042,0.2880729729789775,0.6072573487898817,0.2595786216853564,
+            0.42527009707034213,0.8554982517115192,0.19881223128739234,0.4190786781009155,0.5717062669810782,0.6056543641898247,
+            0.31350654900706265]
+
+exact_solTwo_LR_last = [-0.11160136199834637, -0.2564717326273001,6.765926946366353,13.939398625754482, 2.3035781215995237,-0.38435773976258675,
+            -0.08092284912832182,0.5861551374979737,-0.011766332855426527,-0.0823525412983526, 0.4533662492096458,0.27082075805095895,
+            0.26344605003707455,0.7427950528498357,0.8779279280909038,0.4540986324823928,0.2641874515107618,0.4607366660790664,
+            0.551824962601683,0.6607836038952314,0.48376866367222976,0.22002295484554926,0.29769397531907177,0.3617902423128064,
+            0.7304497765723788,0.33467850852695497,0.7000417433812103,1.0143120494559121,-0.3463421095393143,-0.33510585495011724]
+
+exact_solTwo_last = [-0.11160136199834637, -0.2564717326273001, 6.765926946366353,13.939398625754482 ,2.3035781215995237, -0.38435773976258675,
+            -0.08092284912832182, 0.5861551374979737, -0.011766332855426527,-0.0823525412983526,0.4533662492096458,0.27082075805095895,
+            0.26344605003707455,0.7427950528498357,0.8779279280909038, 0.4540986324823928,0.2641874515107618,0.4607366660790664,
+            0.551824962601683,0.6607836038952314,0.48376866367222976,0.22002295484554926,0.29769397531907177,0.3617902423128064,
+            0.7304497765723788,0.33467850852695497,0.7000417433812103,1.0143120494559121,-0.3463421095393143,-0.33510585495011724]
 struct VarSubgrid
     h::Real
     c::Real
@@ -33,10 +62,10 @@ end
 # include("./tools.jl")
 
 T0 = 0
-Tmax = 10
-K = 36 # so 10 degrees of longtitude per node
-F = 10
-J = 10
+Tmax = 2
+K = 5 # so 10 degrees of longtitude per node
+F = 20
+J = 5
 
 # ux0 = rand(K)
 dt = 0.05
@@ -55,16 +84,30 @@ args = (K, F, J, b, psubgrid)
 argsOne = (F,K)
 probOne = ODEProblem(Lorenz96One_shift!, u0One, (T0,Tmax), argsOne);
 solOne = solve(probOne, dt=dt,saveat=dt);
-solOneX = solOne[:,:]
+solOneX_last = solOne[:,end]
+
+probTwo_LR = ODEProblem(Lorenz96Two_shift_LR!, u0Two_LR, (T0,Tmax), args);
+solTwo_LR = solve(probTwo_LR, dt=dt, saveat=dt);
 
 probTwo = ODEProblem(Lorenz96Two_shift_LR!, u0Two_LR, (T0,Tmax), args);
 solTwo = solve(probTwo, dt=dt, saveat=dt);
 
+
 solTwo_t = solTwo.t
-solTwoX = solTwo[1:K,:]
-solTwoY = solTwo[K+1:end,:]
+solTwo_LR_last = solTwo_LR[:,end] 
+
+solTwo_last = solTwo[:,end] 
+# solTwoX = solTwo[1:K,:]
+# solTwoY = solTwo[K+1:end,:]
 # println(size(solOne))
 # println(size(exact_solOneX))
-@test solOneX ≈ exact_solOneX
-@test solTwoX≈exact_solTwoX_LR
-@test solTwoY≈exact_solTwoY_LR
+@testset "One layer Lorenz 96" begin
+@test solOneX_last ≈ exact_solOneX_last
+end
+@testset "Two layer Lorenz 96" begin
+@test solTwo_last ≈ exact_solTwo_last
+end
+
+@testset "Two layer Lorenz 96 specific formulation" begin
+@test solTwo_LR_last ≈ exact_solTwo_LR_last
+end

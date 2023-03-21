@@ -2,27 +2,6 @@ cd(@__DIR__)
 # using SubgridTest
 using DifferentialEquations, Test
 
-# u0Two_LR = jldopen("./unittest_data.jld2", "r") do file
-#     read(file, "u0Two_LR")
-# end
-
-# exact_solTwoX_LR= jldopen("./unittest_data.jld2", "r") do file
-#     read(file, "solTwoX_LR")
-# end
-
-# exact_solTwoY_LR = jldopen("./unittest_data.jld2", "r") do file
-#     read(file, "solTwoY_LR")
-# end
-
-
-# u0One = jldopen("./unittest_data.jld2", "r") do file
-#     read(file, "u0One")
-# end
-
-
-# exact_solOneX = jldopen("./unittest_data.jld2", "r") do file
-#     read(file, "SolOneX")
-# end
 u0One = ux0 = [0.5650915855652706 ,
         0.4770559381781504,
         0.23330303661742935,
@@ -80,7 +59,7 @@ psubgrid = VarSubgrid(h, c)
 args = (K, F, J, b, psubgrid)
 # args = (F, K, J, h, b, c)
 
-# u0Two = [ux0; uy0]
+
 argsOne = (F,K)
 probOne = ODEProblem(Lorenz96One_shift!, u0One, (T0,Tmax), argsOne);
 solOne = solve(probOne, dt=dt,saveat=dt);
@@ -97,10 +76,7 @@ solTwo_t = solTwo.t
 solTwo_LR_last = solTwo_LR[:,end] 
 
 solTwo_last = solTwo[:,end] 
-# solTwoX = solTwo[1:K,:]
-# solTwoY = solTwo[K+1:end,:]
-# println(size(solOne))
-# println(size(exact_solOneX))
+
 @testset "One layer Lorenz 96" begin
 @test solOneX_last ≈ exact_solOneX_last
 end

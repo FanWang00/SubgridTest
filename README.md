@@ -6,5 +6,5 @@ The most recent release is available via the julia package manager, e.g., with
 
 ```julia
 using Pkg
-Pkg.add(path="https://github.com/FanWang0000/SubgridTest")
+Pkg.add(path="https://github.com/FanWang00/SubgridTest")
 ```
